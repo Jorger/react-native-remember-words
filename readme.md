@@ -1,6 +1,6 @@
 # React Native Remember Words
 
-Versión móvil de la extensión [Remember Words]:https://github.com/Jorger/Extension-Remember_Words desarrollada en React Native
+Versión móvil de la extensión [Remember Words] desarrollada en React Native
 
 ![RW](https://raw.githubusercontent.com/Jorger/react-native-remember-words/master/imgExample/App.gif)
 
