@@ -10,7 +10,7 @@ La motivación de desarrollo de esta aplicación es la de aprender acerca de est
 
 # Opciones
 
-La extensión permite que desde el navegador se almacen las palabras, pero ésta no es funcional en equipos móviles, el objetivo es poder visualizar aquellas palabras que se han almacenado desde el navegador en un equipo móvil, teniendo en cuenta que se comparten los mismo servicios.
+La extensión permite que desde el navegador se almacen las palabras, pero ésta no es funcional en equipos móviles, el objetivo es poder visualizar aquellas palabras que se han almacenado desde el navegador en un equipo móvil, teniendo en cuenta que se comparten los mismos servicios.
 
 ## Agregar una palabra en el navegador, visualizarla en la APP.
 
@@ -28,16 +28,11 @@ La extensión permite que desde el navegador se almacen las palabras, pero ésta
 
 # Backend
 
-Se hace uso del mismo [backend] que la extensión creada para Google Chrome.
+Se hace uso del mismo [backend] usado en la extensión creada para Google Chrome.
 
 # Configuración de Backend
 
-En el archivo [fetcher], se deberá establecer la url del backen, está url es la misma usada por la extensión.
-
-
-## Asignación de Variables de entorno.
-
-El backend cuenta con tres variables de entorno relacionadas a los datos de la Base de datos.
+En el archivo [fetcher] se deberá establecer la url del backen, está url es la misma usada por la extensión.
 
 ```javascript
   const URL_SERVICE = "https://CHANGE_URL_DEPLOY.now.sh";
