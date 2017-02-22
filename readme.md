@@ -38,6 +38,12 @@ En el archivo [fetcher] se deberá establecer la url del backen, está url es la
   const URL_SERVICE = "https://CHANGE_URL_DEPLOY.now.sh";
 ```
 
+# Futuras opciones.
+
+* Versión para Android.
+* Autenticación de usuarios a través de redes sociales.
+
+
 # Enlaces.
 
 * https://facebook.github.io/react-native/
@@ -56,4 +62,6 @@ MIT
 [React Native]:https://facebook.github.io/react-native/
 [backend]:https://github.com/Jorger/Extension-Remember_Words/tree/master/server
 [fetcher]:https://github.com/Jorger/react-native-remember-words/blob/master/utils/fetcher.js#L2
+[mLab]:https://mlab.com/
+[now]:https://zeit.co/now
 
