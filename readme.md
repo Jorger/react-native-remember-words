@@ -4,11 +4,11 @@ Se ha realizado la versión para Android.
 
 ![ANDROID](https://raw.githubusercontent.com/Jorger/react-native-remember-words/master/imgExample/AndroidAndiOS.gif)
 
-* Se hace uso del paquete [react-native-prompt-android] para realizar la entrada de datos en Android, ya que la versión por defecto de [Alert] que tiene react-native no permite la opción de captura de datos.
+* Se hace uso del paquete [react-native-prompt-android] para realizar la entrada de datos en Android, ya que la versión por defecto de [Alert] para Android que tiene react-native no permite la opción de captura de datos.
 
 * Se hace uso del módulo [Platform] para así detectar el sistema operativo móvil en el cual se está desplegando la aplicación.
 
-* Se ha creado el APK de la aplicación, los pasos para crearlo se puede encontrar en la documentación de react-antive en la sección [Generating Signed APK]
+* Se ha creado la APK de la aplicación, los pasos para crearlo se puede encontrar en la documentación de react-antive en la sección [Generating Signed APK]
 
 # React Native Remember Words
 
