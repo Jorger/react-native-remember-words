@@ -46,7 +46,7 @@ En el archivo [fetcher] se deberá establecer la url del backen, está url es la
 
 # Futuras opciones.
 
-* Versión para Android.
+* ~~Versión para Android~~.
 * Autenticación de usuarios a través de redes sociales.
 
 
