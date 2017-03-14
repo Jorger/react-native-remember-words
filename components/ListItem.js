@@ -5,17 +5,22 @@ import {
   View,
   TouchableOpacity,
   Image,
-  AlertIOS
+  Alert
 } from 'react-native';
 import FadeInView from './FadeInView';
 import { clrs, convert_case } from '../utils/utils';
 
 //Lista las palabras y muestra su significado...
 const ListItem = ({ index, text, meaning }) => {
-	return (
+	
+  const showMeaning = (text, meaning) => {
+    Alert.alert(`${convert_case(text)}`, convert_case(meaning));
+  }
+  
+  return (
     	<TouchableOpacity
       		underlayColor={ clrs.gray }
-      		onPress={ () => AlertIOS.alert(`${convert_case(text)}`, convert_case(meaning))}>
+      		onPress={ () => showMeaning(text, meaning)}>
       		<FadeInView delay={ index * 25 }>
         		<View style={ styles.mediaObject }>
           			<Text style={ styles.text }>{ convert_case(text) }</Text>

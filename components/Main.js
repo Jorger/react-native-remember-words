@@ -5,6 +5,7 @@ import {
 	TextInput,
 	ListView,
 	StatusBar,
+	Platform
 } from 'react-native';
 import {debounce} from 'lodash';
 import ListItem from './ListItem';
@@ -41,7 +42,7 @@ export default class Main extends Component {
 		return (
 			<View style={ styles.container }>
         		<StatusBar barStyle="light-content" />
-        			<TextInput style={ styles.searchBox }
+        			<TextInput style={ Platform.OS === 'ios' ? styles.searchBoxiOS : styles.searchBoxAndroid}
           				onChangeText={ this.makeQuery }
           				keyboardType="web-search"
           				placeholder="Search Word"
@@ -83,13 +84,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: clrs.white,
   },
-  searchBox: {
+  searchBoxiOS: {
     height: 40,
     borderColor: clrs.black,
     borderWidth: 2,
     margin: 16,
     paddingLeft: 10,
     fontWeight: '800',
+  },
+	searchBoxAndroid: {
+    height: 40,
+    margin: 16,
+    paddingLeft: 10,
+    fontWeight: '800',
+		fontSize : 18, 
+		alignSelf: "stretch"
   },
   listView: {
     flex: 1,

@@ -4,24 +4,26 @@ import {
   Navigator,
   Text,
   TouchableOpacity,
-  AlertIOS
+  AlertIOS, 
+	Platform, 
+	Alert
 } from 'react-native';
 import { clrs } from '../utils/utils';
 import { saveWord, searchFor } from '../utils/fetcher';
+//Para Android...
+import prompt from 'react-native-prompt-android';
 
-//Crear una nueva palabra...
-const newWord =  () => {
-	AlertIOS.prompt('Type the new word', null, word => {
-		if(word !== ""){
-			//Saber si la palabra existe...
-			searchFor(`word/${word}`)
+//Crear una nueva palabra y validar si está ya existe...
+const newWord = word => {
+	if(word !== ""){
+		searchFor(`word/${word}`)
 			.then(response => {
 				if(response.error){
-					meaningWord(word);
+					addMeaningWord(word);
 				}
 				else {
-					AlertIOS.alert(
-						`Meaning: ${response.meaning}`,
+					Alert.alert(
+						`Meaning: ${response.meaning}`, 
 						`The word ${word} already exists`
 					);
 				}
@@ -29,49 +31,71 @@ const newWord =  () => {
 			.catch((error) => {
 				throw error;
 			});
-		}
-		else {
-			errorAlert("word");
-		}
-	});
+	}
+	else {
+		errorAlert("word");
+	}
+};
+
+//Crear una nueva palabra...
+const addNewWord =  () => {
+	if(Platform.OS === 'ios'){
+		AlertIOS.prompt('Type the new word', null, word => newWord(word));
+	}
+	else {
+		prompt('Type the new word', null, [
+			{text: 'Cancel'}, 
+			{text: 'OK', onPress: word => newWord(word)}
+		]);
+	}
+};
+
+//Adicionar el significado de la palabra...
+const addMeaningWord = (word) => {
+	if(Platform.OS === 'ios'){
+		AlertIOS.prompt(`Write the meaning of the word ${word}`, null, meaning => meaningWord(word, meaning));
+	}
+	else {
+		prompt(`Write the meaning of the word ${word}`, null, [
+			{text: 'Cancel'}, 
+			{text: 'OK', onPress: meaning => meaningWord(word, meaning)}
+		]);
+	}
 };
 
 //Guadar el significado de la palabra...
-const meaningWord = (word) => {
-	AlertIOS.prompt(`Write the meaning of the word ${word}`, null, meaning => {
-		if(meaning !== ""){
-			saveWord(word, meaning, (status) => {
-				AlertIOS.alert(
-					status ? word : 'Error',
-					status ? 'Saved successfully' : 'Failed to save the word'
-				);
-			});
-		}
-		else {
-			errorAlert("meaning", word);
-		}
-	});
+const meaningWord = (word, meaning) => {	
+	if(meaning !== ""){
+		saveWord(word, meaning, (status) => {
+			Alert.alert(
+				status ? word : 'Error',
+				status ? 'Saved successfully' : 'Failed to save the word'
+			);
+		});
+	}
+	else {
+		errorAlert("meaning", word);
+	}
 };
 
 //Mostrar errores cuando no se completan los campos...
 const errorAlert = (type, word = "") => {
-	AlertIOS.alert(
-		'Error',
-		type === 'word' ? 'Please, type the new word' : `Please, write the meaning of the word ${word}`,
-		[
-			{
-				text: 'Ok', 
+	Alert.alert(
+  	'Error',
+  	type === 'word' ? 'Please, type the new word' : `Please, write the meaning of the word ${word}`, 
+  	[
+    	{
+				text: 'OK', 
 				onPress: () => {
 					if(type === "word"){
-						newWord();
+						addNewWord();
 					}
-					else{
-						meaningWord(word);
+					else {
+						addMeaningWord(word);
 					}
 				}
 			}
-		]
-	);
+		]);
 };
 
 const NavigationBarRouteMapper = {
@@ -83,7 +107,7 @@ const NavigationBarRouteMapper = {
   RightButton: (route, navigator) => {
     return (
       <TouchableOpacity
-        onPress={ () => newWord() }
+        onPress={ () => addNewWord() }
         style={ styles.navBarRightButton }>
         <Text style={[styles.navBarText, styles.navBarButtonText]}>
           + ADD
@@ -103,20 +127,21 @@ const NavigationBarRouteMapper = {
 
 const styles = StyleSheet.create({
   navBar: {
-    backgroundColor: clrs.cyan,
+    backgroundColor: '#3F51B5',
   },
   navBarText: {
-    fontSize: 16,
+    fontSize: Platform.OS === 'ios' ? 16 : 20,
     marginVertical: 10,
     color: clrs.white,
     fontWeight: 'bold'
   },
   navBarTitleText: {
     fontWeight: '500',
-    marginVertical: 9,
+    marginVertical: Platform.OS === 'ios' ? 9 : 15,
   },
   navBarRightButton: {
-    paddingRight: 20
+    paddingRight: 20,
+		marginVertical: Platform.OS === 'ios' ? 0 : 5,
   },
 });
 
